@@ -1,0 +1,445 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1D369E265E67C3E0D71AE621 /* Pods_Chirpi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDCB9D63BEB6739F0A41C90A /* Pods_Chirpi.framework */; };
+		28298A0E1E5A69BF00B1AF01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28298A0D1E5A69BF00B1AF01 /* AppDelegate.swift */; };
+		28298A131E5A69BF00B1AF01 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28298A111E5A69BF00B1AF01 /* Main.storyboard */; };
+		28298A151E5A69BF00B1AF01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28298A141E5A69BF00B1AF01 /* Assets.xcassets */; };
+		28298A181E5A69BF00B1AF01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28298A161E5A69BF00B1AF01 /* LaunchScreen.storyboard */; };
+		28298A201E5A6B0E00B1AF01 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28298A1F1E5A6B0E00B1AF01 /* LoginViewController.swift */; };
+		28298A221E5A6C7000B1AF01 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28298A211E5A6C7000B1AF01 /* Util.swift */; };
+		28298A281E5A8BFC00B1AF01 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28298A271E5A8BFC00B1AF01 /* User.swift */; };
+		28298A2A1E5A8C0C00B1AF01 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28298A291E5A8C0C00B1AF01 /* Tweet.swift */; };
+		28298A2D1E5AA62100B1AF01 /* TwitterClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28298A2C1E5AA62100B1AF01 /* TwitterClient.swift */; };
+		28298A2F1E5AAC2100B1AF01 /* TweetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28298A2E1E5AAC2100B1AF01 /* TweetsViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		28298A0A1E5A69BF00B1AF01 /* Chirpi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chirpi.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		28298A0D1E5A69BF00B1AF01 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		28298A121E5A69BF00B1AF01 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		28298A141E5A69BF00B1AF01 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		28298A171E5A69BF00B1AF01 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		28298A191E5A69BF00B1AF01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28298A1F1E5A6B0E00B1AF01 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		28298A211E5A6C7000B1AF01 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		28298A271E5A8BFC00B1AF01 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		28298A291E5A8C0C00B1AF01 /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
+		28298A2C1E5AA62100B1AF01 /* TwitterClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterClient.swift; sourceTree = "<group>"; };
+		28298A2E1E5AAC2100B1AF01 /* TweetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetsViewController.swift; sourceTree = "<group>"; };
+		2B4EF07D00AC454E804EDCC9 /* Pods-Chirpi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chirpi.release.xcconfig"; path = "Pods/Target Support Files/Pods-Chirpi/Pods-Chirpi.release.xcconfig"; sourceTree = "<group>"; };
+		8AA0AB63B1FD8514E28995C4 /* Pods-Chirpi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chirpi.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Chirpi/Pods-Chirpi.debug.xcconfig"; sourceTree = "<group>"; };
+		CDCB9D63BEB6739F0A41C90A /* Pods_Chirpi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chirpi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		28298A071E5A69BF00B1AF01 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D369E265E67C3E0D71AE621 /* Pods_Chirpi.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		28298A011E5A69BF00B1AF01 = {
+			isa = PBXGroup;
+			children = (
+				28298A0C1E5A69BF00B1AF01 /* Chirpi */,
+				28298A0B1E5A69BF00B1AF01 /* Products */,
+				995B3C8925E6FBC896D994D0 /* Pods */,
+				5E78F0F45370FCD6B6131D4D /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		28298A0B1E5A69BF00B1AF01 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				28298A0A1E5A69BF00B1AF01 /* Chirpi.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		28298A0C1E5A69BF00B1AF01 /* Chirpi */ = {
+			isa = PBXGroup;
+			children = (
+				28298A0D1E5A69BF00B1AF01 /* AppDelegate.swift */,
+				28298A2B1E5AA5F900B1AF01 /* API */,
+				28298A261E5A8BD700B1AF01 /* Resources */,
+				28298A241E5A8BCE00B1AF01 /* Views */,
+				28298A251E5A8BD100B1AF01 /* ViewControllers */,
+				28298A231E5A8BC900B1AF01 /* Models */,
+				28298A111E5A69BF00B1AF01 /* Main.storyboard */,
+				28298A141E5A69BF00B1AF01 /* Assets.xcassets */,
+				28298A161E5A69BF00B1AF01 /* LaunchScreen.storyboard */,
+				28298A191E5A69BF00B1AF01 /* Info.plist */,
+			);
+			path = Chirpi;
+			sourceTree = "<group>";
+		};
+		28298A231E5A8BC900B1AF01 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				28298A271E5A8BFC00B1AF01 /* User.swift */,
+				28298A291E5A8C0C00B1AF01 /* Tweet.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		28298A241E5A8BCE00B1AF01 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		28298A251E5A8BD100B1AF01 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				28298A1F1E5A6B0E00B1AF01 /* LoginViewController.swift */,
+				28298A2E1E5AAC2100B1AF01 /* TweetsViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		28298A261E5A8BD700B1AF01 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				28298A211E5A6C7000B1AF01 /* Util.swift */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		28298A2B1E5AA5F900B1AF01 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				28298A2C1E5AA62100B1AF01 /* TwitterClient.swift */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
+		5E78F0F45370FCD6B6131D4D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CDCB9D63BEB6739F0A41C90A /* Pods_Chirpi.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		995B3C8925E6FBC896D994D0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8AA0AB63B1FD8514E28995C4 /* Pods-Chirpi.debug.xcconfig */,
+				2B4EF07D00AC454E804EDCC9 /* Pods-Chirpi.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		28298A091E5A69BF00B1AF01 /* Chirpi */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 28298A1C1E5A69BF00B1AF01 /* Build configuration list for PBXNativeTarget "Chirpi" */;
+			buildPhases = (
+				08FCBDA79E045F66ADA900BA /* [CP] Check Pods Manifest.lock */,
+				28298A061E5A69BF00B1AF01 /* Sources */,
+				28298A071E5A69BF00B1AF01 /* Frameworks */,
+				28298A081E5A69BF00B1AF01 /* Resources */,
+				F537C59EC1558D5656AB60F5 /* [CP] Embed Pods Frameworks */,
+				F34B0A39B878A1B7C7A41244 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Chirpi;
+			productName = Chirpi;
+			productReference = 28298A0A1E5A69BF00B1AF01 /* Chirpi.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		28298A021E5A69BF00B1AF01 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "Steven Hurtado";
+				TargetAttributes = {
+					28298A091E5A69BF00B1AF01 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = E55B666VZ8;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 28298A051E5A69BF00B1AF01 /* Build configuration list for PBXProject "Chirpi" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 28298A011E5A69BF00B1AF01;
+			productRefGroup = 28298A0B1E5A69BF00B1AF01 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				28298A091E5A69BF00B1AF01 /* Chirpi */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		28298A081E5A69BF00B1AF01 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28298A181E5A69BF00B1AF01 /* LaunchScreen.storyboard in Resources */,
+				28298A151E5A69BF00B1AF01 /* Assets.xcassets in Resources */,
+				28298A131E5A69BF00B1AF01 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		08FCBDA79E045F66ADA900BA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F34B0A39B878A1B7C7A41244 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Chirpi/Pods-Chirpi-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F537C59EC1558D5656AB60F5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Chirpi/Pods-Chirpi-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		28298A061E5A69BF00B1AF01 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28298A281E5A8BFC00B1AF01 /* User.swift in Sources */,
+				28298A2A1E5A8C0C00B1AF01 /* Tweet.swift in Sources */,
+				28298A201E5A6B0E00B1AF01 /* LoginViewController.swift in Sources */,
+				28298A221E5A6C7000B1AF01 /* Util.swift in Sources */,
+				28298A2F1E5AAC2100B1AF01 /* TweetsViewController.swift in Sources */,
+				28298A2D1E5AA62100B1AF01 /* TwitterClient.swift in Sources */,
+				28298A0E1E5A69BF00B1AF01 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		28298A111E5A69BF00B1AF01 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				28298A121E5A69BF00B1AF01 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		28298A161E5A69BF00B1AF01 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				28298A171E5A69BF00B1AF01 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		28298A1A1E5A69BF00B1AF01 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		28298A1B1E5A69BF00B1AF01 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		28298A1D1E5A69BF00B1AF01 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8AA0AB63B1FD8514E28995C4 /* Pods-Chirpi.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = E55B666VZ8;
+				INFOPLIST_FILE = Chirpi/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.StevenHurtado.Chirpi;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		28298A1E1E5A69BF00B1AF01 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2B4EF07D00AC454E804EDCC9 /* Pods-Chirpi.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = E55B666VZ8;
+				INFOPLIST_FILE = Chirpi/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.StevenHurtado.Chirpi;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		28298A051E5A69BF00B1AF01 /* Build configuration list for PBXProject "Chirpi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28298A1A1E5A69BF00B1AF01 /* Debug */,
+				28298A1B1E5A69BF00B1AF01 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		28298A1C1E5A69BF00B1AF01 /* Build configuration list for PBXNativeTarget "Chirpi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28298A1D1E5A69BF00B1AF01 /* Debug */,
+				28298A1E1E5A69BF00B1AF01 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 28298A021E5A69BF00B1AF01 /* Project object */;
+}

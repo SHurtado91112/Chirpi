@@ -1,0 +1,6 @@
+framework module Pods_Chirpi {
+  umbrella header "Pods-Chirpi-umbrella.h"
+
+  export *
+  module * { export * }
+}
