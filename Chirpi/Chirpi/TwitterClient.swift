@@ -46,8 +46,12 @@ class TwitterClient: BDBOAuth1SessionManager
             
             print("Access Token Success")
             
-            self.loginSuccess?()
-            
+            self.currentAccount(success: { (user: User) in
+                User.currentUser = user
+                self.loginSuccess?()
+            }, failure: { (error: Error) in
+                self.loginFailure?(error)
+            })
 //            client?.currentAccount()
 //            client?.homeTimeline(success: { (tweets: [Tweet]) in
 //                for tweet in tweets
@@ -86,19 +90,17 @@ class TwitterClient: BDBOAuth1SessionManager
 
     }
     
-    func currentAccount()
+    func currentAccount(success: @escaping (User) -> (), failure: @escaping (Error)->())
     {
         get(KeysAndTokens.verify_credentials, parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
-            
-            //                print("Account Accessed: \(response)")
-            
             let userDictionary = response as! NSDictionary
             
             let user = User(dictionary: userDictionary)
-            print(user.name!)
+            
+            success(user)
             
         }, failure: { (task: URLSessionDataTask?, error: Error) in
-            print("error: \(error)")
+            failure(error)
         })
 
     }
