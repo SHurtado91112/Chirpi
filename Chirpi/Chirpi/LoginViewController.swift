@@ -8,10 +8,10 @@
 
 import UIKit
 import BDBOAuth1Manager
+import CCAnimations
 
 class LoginViewController: UIViewController
 {
-
     @IBOutlet weak var loginBtn: UIButton!
     
     @IBOutlet weak var chirpiImg: UIImageView!
@@ -21,9 +21,11 @@ class LoginViewController: UIViewController
         super.viewDidLoad()
         
         chirpiImg.image = UIImage(named: "Chirpi")?.withRenderingMode(.alwaysTemplate)
-        
         animateChirpi()
+//        let timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(animateChirpi), userInfo: nil, repeats: true)
+//        timer.fire()
 
+        
         self.loginBtn.layer.cornerRadius = 40
         self.loginBtn.layer.borderColor = UIColor.twitterBlue.cgColor
         self.loginBtn.layer.borderWidth = 4
@@ -31,7 +33,16 @@ class LoginViewController: UIViewController
     
     func animateChirpi()
     {
+        let circlePath = UIBezierPath(arcCenter: CGPoint(x: view.frame.midX, y: view.frame.midY), radius: 140, startAngle: 0, endAngle:CGFloat(M_PI)*2, clockwise: true)
         
+        let animation = CAKeyframeAnimation(keyPath: "position")
+        
+        animation.duration = 3
+        animation.repeatCount = MAXFLOAT
+        animation.path = circlePath.cgPath
+
+        self.chirpiImg.layer.add(animation, forKey: nil)
+    
     }
 
     @IBAction func loginPressed(_ sender: Any)

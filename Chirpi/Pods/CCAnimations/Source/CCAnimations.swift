@@ -58,14 +58,14 @@ extension UIView {
                                      removedOnCompletion:Bool = true) {
         
         animation.duration = duration
-        animation.cumulative = cumulative
+        animation.isCumulative = cumulative
         animation.repeatCount = repeatCount
         animation.fromValue = fromValue
         animation.toValue = toValue
         animation.byValue = byValue
         animation.autoreverses = reverse
         animation.fillMode = fillMode
-        animation.removedOnCompletion = removedOnCompletion
+        animation.isRemovedOnCompletion = removedOnCompletion
     }
     
     private func setupKeyFrameAnimation(animation:CAKeyframeAnimation,
@@ -87,7 +87,7 @@ extension UIView {
     }
     
     private func runAnimation(animation:CAAnimation) {
-        self.layer.addAnimation(animation, forKey: nil)
+        self.layer.add(animation, forKey: nil)
     }
     
     // MARK: - Factory
@@ -118,50 +118,50 @@ extension UIView {
     // MARK: - Animation Helpers
     
     private func scaleAnimation(size:CGFloat, duration:CFTimeInterval) {
-        let animation = newAnimation(CASpringAnimation.self, keyPath: .scale)
-        setupBasicAnimation(animation, duration: duration, toValue:size, reverse:true)
-        setupSpringAnimation(animation, damping: 7.0, initialVelocity: 1.1, speed: 1.7)
-        runAnimation(animation)
+        let animation = newAnimation(type: CASpringAnimation.self, keyPath: .scale)
+        setupBasicAnimation(animation: animation, duration: duration, toValue:size as AnyObject?, reverse:true)
+        setupSpringAnimation(animation: animation, damping: 7.0, initialVelocity: 1.1, speed: 1.7)
+        runAnimation(animation: animation)
     }
     
     private func shakeAnimation(duration:CFTimeInterval) {
         let centerPoint = self.center
         let animationValues = [centerPoint.x, centerPoint.x + 5, centerPoint.x - 5, centerPoint.x + 5, centerPoint.x]
         let keyTimes = [0, 0.25, 0.75, 1.25, 1]
-        let animation = newAnimation(CAKeyframeAnimation.self, keyPath: .xPosition)
-        setupKeyFrameAnimation(animation, values: animationValues, keyTimes: keyTimes, duration: duration)
-        runAnimation(animation)
+        let animation = newAnimation(type: CAKeyframeAnimation.self, keyPath: .xPosition)
+        setupKeyFrameAnimation(animation: animation, values: animationValues as [AnyObject]?, keyTimes: keyTimes as [AnyObject]?, duration: duration)
+        runAnimation(animation: animation)
     }
     
     private func rotate360(repeatCount repeatCount:Float, duration:CFTimeInterval) {
-        let animation = newAnimation(CABasicAnimation.self, keyPath: .zRotation)
-        let repeatCount = repeatCount == 0 ? Float(CGFloat.max) : repeatCount
-        setupBasicAnimation(animation, duration:duration, toValue:(M_PI * 2.0), repeatCount:repeatCount)
-        runAnimation(animation)
+        let animation = newAnimation(type: CABasicAnimation.self, keyPath: .zRotation)
+        let repeatCount = repeatCount == 0 ? Float(CGFloat.greatestFiniteMagnitude) : repeatCount
+        setupBasicAnimation(animation: animation, duration:duration, toValue: ((M_PI*2.0) as? AnyObject?)!, repeatCount:repeatCount)
+        runAnimation(animation: animation)
     }
     
     private func jumpWithIntensity(withIntensity intensity:CGFloat, duration:CFTimeInterval) {
         let currentPoint = self.center
         let fromValue = currentPoint.y
         let toValue = fromValue - intensity
-        let animation = newAnimation(CASpringAnimation.self, keyPath: .yPosition)
-        setupBasicAnimation(animation, duration: duration, toValue:toValue, reverse:true)
-        setupSpringAnimation(animation, damping: 8.2, initialVelocity: 1.2, speed: 1.1)
-        runAnimation(animation)
+        let animation = newAnimation(type: CASpringAnimation.self, keyPath: .yPosition)
+        setupBasicAnimation(animation: animation, duration: duration, toValue:toValue as AnyObject?, reverse:true)
+        setupSpringAnimation(animation: animation, damping: 8.2, initialVelocity: 1.2, speed: 1.1)
+        runAnimation(animation: animation)
     }
     
     private func rotate3DWithAxis(axis:Axis, withDuration duration:CFTimeInterval) {
         var transform3D:CATransform3D
         
         if axis == .x {
-            transform3D = CATransform3DRotate(self.layer.transform, CGFloat(degreeToRadians(180)), 0.0, 1.0, 0.0)
+            transform3D = CATransform3DRotate(self.layer.transform, CGFloat(degreeToRadians(angle: 180)), 0.0, 1.0, 0.0)
         } else {
-            transform3D = CATransform3DRotate(self.layer.transform, CGFloat(degreeToRadians(180)), 1.0, 0.0, 0.0)
+            transform3D = CATransform3DRotate(self.layer.transform, CGFloat(degreeToRadians(angle: 180)), 1.0, 0.0, 0.0)
         }
     
-        let animation = newAnimation(CABasicAnimation.self, keyPath: .transform)
-        setupBasicAnimation(animation, duration: duration, toValue: NSValue(CATransform3D:transform3D), fillMode:kCAFillModeForwards, removedOnCompletion:false, repeatCount:2, cumulative:true)
-        runAnimation(animation)
+        let animation = newAnimation(type: CABasicAnimation.self, keyPath: .transform)
+        setupBasicAnimation(animation: animation, duration: duration, toValue: NSValue(caTransform3D:transform3D), cumulative:true, repeatCount:2, fillMode:kCAFillModeForwards, removedOnCompletion:false)
+        runAnimation(animation: animation)
     }
     
     private func moveSideways(WithDuration duration:CFTimeInterval, side:Side, value:CGFloat) {
@@ -186,15 +186,15 @@ extension UIView {
             toValue += value
         }
         
-        let animation = newAnimation(CABasicAnimation.self, keyPath: keyPath)
-        setupBasicAnimation(animation, duration: duration, toValue:toValue)
-        runAnimation(animation)
+        let animation = newAnimation(type: CABasicAnimation.self, keyPath: keyPath)
+        setupBasicAnimation(animation: animation, duration: duration, toValue:toValue as AnyObject?)
+        runAnimation(animation: animation)
     }
     
     private func alphaAnimation(withDuration duration:CFTimeInterval, withAlpha alpha:CGFloat) {
-        let animation = newAnimation(CABasicAnimation.self, keyPath: .opacity)
-        setupBasicAnimation(animation, duration: duration, toValue:alpha)
-        runAnimation(animation)
+        let animation = newAnimation(type: CABasicAnimation.self, keyPath: .opacity)
+        setupBasicAnimation(animation: animation, duration: duration, toValue:alpha as AnyObject?)
+        runAnimation(animation: animation)
     }
     
     
@@ -207,7 +207,7 @@ extension UIView {
      - parameter scale: The scale size that the view will resize to (1.0 is the original scale)
      */
     func CCAnimationPop(duration:CFTimeInterval = 0.3, scale:CGFloat = 1.05) {
-        scaleAnimation(scale, duration: duration)
+        scaleAnimation(size: scale, duration: duration)
     }
     
     /**
@@ -216,7 +216,7 @@ extension UIView {
      - parameter duration:    The duration of the animation
      */
     func CCAnimationShake(duration:CFTimeInterval = 0.4) {
-        shakeAnimation(duration)
+        shakeAnimation(duration: duration)
     }
     
     /**
@@ -245,7 +245,7 @@ extension UIView {
      - parameter duration: The animation duration
      */
     func CCAnimation3DxRotation(duration:CFTimeInterval = 0.4) {
-        rotate3DWithAxis(.x, withDuration: duration)
+        rotate3DWithAxis(axis: .x, withDuration: duration)
     }
     
     /**
@@ -254,7 +254,7 @@ extension UIView {
      - parameter duration: The animation duration
      */
     func CCAnimation3DyRotation(duration:CFTimeInterval = 0.4) {
-        rotate3DWithAxis(.y, withDuration: duration)
+        rotate3DWithAxis(axis: .y, withDuration: duration)
     }
     
     /**
@@ -264,8 +264,8 @@ extension UIView {
      - parameter intensity: how much the view will be moved in the Y axis.
      */
     func CCAnimationJumpTwistX(duration:CFTimeInterval = 0.4, intensity:CGFloat) {
-        CCAnimationJump(duration, intensity: intensity)
-        CCAnimation3DxRotation(duration)
+        CCAnimationJump(duration: duration, intensity: intensity)
+        CCAnimation3DxRotation(duration: duration)
     }
     
     /**
@@ -275,8 +275,8 @@ extension UIView {
      - parameter intensity: how much the view will be moved in the Y axis.
      */
     func CCAnimationJumpTwistY(duration:CFTimeInterval = 0.4, intensity:CGFloat) {
-        CCAnimationJump(duration, intensity: intensity)
-        CCAnimation3DyRotation(duration)
+        CCAnimationJump(duration: duration, intensity: intensity)
+        CCAnimation3DyRotation(duration: duration)
     }
     
     /**
