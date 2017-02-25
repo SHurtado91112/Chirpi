@@ -1,4 +1,6 @@
-# Project 4 - *Twitter Clone*
+# Project 4 - *Chirpi*
+## *A Twitter Clone*
+![chirpilogo_small](https://cloud.githubusercontent.com/assets/11231583/23326859/27f3f01c-fad1-11e6-81fa-5b762c685b5e.png)
 
 **Chirpi** is a basic twitter app to read and compose tweets the [Twitter API](https://apps.twitter.com/).
 
