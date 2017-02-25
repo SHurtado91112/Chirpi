@@ -79,6 +79,50 @@ class TwitterClient: BDBOAuth1SessionManager
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: User.userDidLogOutNotification), object: nil)
     }
     
+    func favWithId(id: String)
+    {
+        let urlString = KeysAndTokens.baseURL + KeysAndTokens.favorite_URL + "\(id)"
+        
+        post(urlString, parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            print("Favorited")
+        }) { (task: URLSessionDataTask?, error: Error) in
+            print("Error: \(error.localizedDescription)")
+        }
+    }
+    
+    func unfavWithId(id: String)
+    {
+        let urlString = KeysAndTokens.baseURL + KeysAndTokens.unfavorite_URL + "\(id)"
+        
+        post(urlString, parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            print("Unfavorited")
+        }) { (task: URLSessionDataTask?, error: Error) in
+            print("Error: \(error.localizedDescription)")
+        }
+    }
+    
+    func retweetWithId(id: String)
+    {
+        let urlString = KeysAndTokens.baseURL + KeysAndTokens.retweet_URL + "\(id).json"
+        
+        post(urlString, parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            print("Retweeted")
+        }) { (task: URLSessionDataTask?, error: Error) in
+            print("Error: \(error.localizedDescription)")
+        }
+    }
+    
+    func unretweetWithId(id: String)
+    {
+        let urlString = KeysAndTokens.baseURL + KeysAndTokens.unretweet_URL + "\(id).json"
+        
+        post(urlString, parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            print("Unretweeted")
+        }) { (task: URLSessionDataTask?, error: Error) in
+            print("Error: \(error.localizedDescription)")
+        }
+    }
+    
     func homeTimeline(success: @escaping ([Tweet]) -> (), failure: (Error) -> ())
     {
         get(KeysAndTokens.home_timeline, parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in

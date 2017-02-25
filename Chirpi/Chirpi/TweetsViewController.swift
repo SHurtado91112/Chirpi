@@ -16,6 +16,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBOutlet weak var logNavBarBtn: UIBarButtonItem!
     
+
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad()
@@ -63,6 +64,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let cell = tableView.dequeueReusableCell(withIdentifier: "tweetCell", for: indexPath) as! TweetCell
         
         let tweet = self.tweets[indexPath.row]
+        cell.parentView = self
         
         cell.tweet = tweet
         
@@ -77,14 +79,14 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
 //        self.performSegue(withIdentifier: "detailSegue", sender: indexPath)
     }
-
     
     @IBAction func logOutPressed(_ sender: Any)
     {
         TwitterClient.sharedInstance?.logOut()
     }
     
-    override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning()
+    {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }

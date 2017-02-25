@@ -23,6 +23,11 @@ struct KeysAndTokens
     
     static let verify_credentials : String = "1.1/account/verify_credentials.json"
     static let home_timeline : String = "1.1/statuses/home_timeline.json"
+    
+    static let retweet_URL : String = "1.1/statuses/retweet/"
+    static let unretweet_URL : String = "1.1/statuses/unretweet/"
+    static let favorite_URL : String = "1.1/favorites/create.json?id="
+    static let unfavorite_URL : String = "1.1/favorites/destroy.json?id="
 }
 
 extension UIColor

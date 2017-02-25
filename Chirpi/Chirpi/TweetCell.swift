@@ -10,6 +10,9 @@ import UIKit
 
 class TweetCell: UITableViewCell
 {
+    
+    weak var parentView: UIViewController? = nil
+    
     @IBOutlet weak var nameLabel: UILabel!
     var nameText : String!
     
@@ -32,15 +35,13 @@ class TweetCell: UITableViewCell
     
     
     var tweet: Tweet!
-        {
+    {
         didSet
         {
             nameLabel.text = tweet.userName!
             handleLabel.text = "@\(tweet.userHandle!)"
             
             tweetLabel.text = tweet.text!
-            
-            //timeLabel.text = tweet.timestamp as! String
             
             if(tweet.avatarLink != nil)
             {
@@ -60,6 +61,33 @@ class TweetCell: UITableViewCell
                 timeLabel.text = getFormat(date: tweet.timestamp!)
             }
             
+            if(tweet.isRetweeted != nil)
+            {
+                if(tweet.isRetweeted!)
+                {
+                    retweetBtn.tintColor = UIColor.twitterBlue
+                    retweetCountLabel.textColor = UIColor.twitterBlue
+                }
+                else
+                {
+                    retweetBtn.tintColor = UIColor.myOnyxGray
+                    retweetCountLabel.textColor = UIColor.myOnyxGray
+                }
+            }
+            
+            if(tweet.isFavorited != nil)
+            {
+                if(tweet.isFavorited!)
+                {
+                    favoriteBtn.tintColor = UIColor.myRoseMadder
+                    favoriteCountLabel.textColor = UIColor.myRoseMadder
+                }
+                else
+                {
+                    favoriteBtn.tintColor = UIColor.myOnyxGray
+                    favoriteCountLabel.textColor = UIColor.myOnyxGray
+                }
+            }
             
             if(tweet.retweetCount == 0)
             {
@@ -69,30 +97,32 @@ class TweetCell: UITableViewCell
             {
                 let countVal = tweet.retweetCount
                 
-                if(countVal >= 1000)
-                {
-                    let countText = "\(countVal)"
-                    
-                    let index1 = countText.index(countText.startIndex, offsetBy: 1)
-
-                    let firstParse = countText.substring(to: index1)
-                    
-                    //second value
-                    let start = countText.index(countText.startIndex, offsetBy: 1)
-                    let end = countText.index(countText.startIndex, offsetBy: 2)
-                    let range = start..<end
-                    
-                    let secondParse = countText.substring(with: range)
-                    
-                    print()
-                    
-                    retweetCountLabel.text = "\(firstParse).\(secondParse)K"
-                    
-                }
-                else
-                {
-                    retweetCountLabel.text = "\(countVal)"
-                }
+                retweetCountLabel.text = getFormatString(countVal: countVal)
+                
+//                if(countVal >= 1000)
+//                {
+//                    let countText = "\(countVal)"
+//                    
+//                    let index1 = countText.index(countText.startIndex, offsetBy: 1)
+//
+//                    let firstParse = countText.substring(to: index1)
+//                    
+//                    //second value
+//                    let start = countText.index(countText.startIndex, offsetBy: 1)
+//                    let end = countText.index(countText.startIndex, offsetBy: 2)
+//                    let range = start..<end
+//                    
+//                    let secondParse = countText.substring(with: range)
+//                    
+//                    print()
+//                    
+//                    retweetCountLabel.text = "\(firstParse).\(secondParse)K"
+//                    
+//                }
+//                else
+//                {
+//                    retweetCountLabel.text = "\(countVal)"
+//                }
             }
             
             if(tweet.favCount == 0)
@@ -102,31 +132,8 @@ class TweetCell: UITableViewCell
             else
             {
                 let countVal = tweet.favCount
+                favoriteCountLabel.text = getFormatString(countVal: countVal)
                 
-                if(countVal >= 1000)
-                {
-                    let countText = "\(countVal)"
-                    
-                    let index1 = countText.index(countText.startIndex, offsetBy: 1)
-                    
-                    let firstParse = countText.substring(to: index1)
-                    
-                    //second value
-                    let start = countText.index(countText.startIndex, offsetBy: 1)
-                    let end = countText.index(countText.startIndex, offsetBy: 2)
-                    let range = start..<end
-                    
-                    let secondParse = countText.substring(with: range)
-                    
-                    print()
-                    
-                    favoriteCountLabel.text = "\(firstParse).\(secondParse)K"
-                    
-                }
-                else
-                {
-                    favoriteCountLabel.text = "\(tweet.favCount)"
-                }
             }
         }
     }
@@ -135,7 +142,76 @@ class TweetCell: UITableViewCell
     {
         super.awakeFromNib()
     }
-
+    
+    @IBAction func retweetPressed(_ sender: Any)
+    {
+        if(tweet.isRetweeted != nil)
+        {
+            if(!tweet.isRetweeted!)
+            {
+                retweetBtn.tintColor = UIColor.twitterBlue
+                retweetCountLabel.textColor = UIColor.twitterBlue
+                
+                TwitterClient.sharedInstance?.retweetWithId(id: tweet.id!)
+                tweet.isRetweeted = !tweet.isRetweeted!
+                
+                let countVal = tweet.retweetCount + 1
+                retweetCountLabel.text = getFormatString(countVal: countVal)
+            }
+            else
+            {
+                retweetBtn.tintColor = UIColor.myOnyxGray
+                retweetCountLabel.textColor = UIColor.myOnyxGray
+                
+                TwitterClient.sharedInstance?.unretweetWithId(id: tweet.id!)
+                tweet.isRetweeted = !tweet.isRetweeted!
+                
+                let countVal = tweet.retweetCount - 1
+                retweetCountLabel.text = getFormatString(countVal: countVal)
+            }
+            
+//            if(self.parent != nil)
+//            {
+//                self.parent?.reloadData()
+//            }
+        }
+    }
+    
+    @IBAction func favoritePressed(_ sender: Any)
+    {
+        if(tweet.isFavorited != nil)
+        {
+            if(!tweet.isFavorited!)
+            {
+                favoriteBtn.tintColor = UIColor.myRoseMadder
+                favoriteCountLabel.textColor = UIColor.myRoseMadder
+                
+                TwitterClient.sharedInstance?.favWithId(id: tweet.id!)
+                tweet.isFavorited = !tweet.isFavorited!
+                
+                let countVal = tweet.favCount + 1
+                favoriteCountLabel.text = getFormatString(countVal: countVal)
+            }
+            else
+            {
+                favoriteBtn.tintColor = UIColor.myOnyxGray
+                favoriteCountLabel.textColor = UIColor.myOnyxGray
+                
+                TwitterClient.sharedInstance?.unfavWithId(id: tweet.id!)
+                tweet.isFavorited = !tweet.isFavorited!
+                
+                let countVal = tweet.favCount - 1
+                favoriteCountLabel.text = getFormatString(countVal: countVal)
+            }
+            
+//            
+//            if(self.parent != nil)
+//            {
+//                self.parent?.reloadData()
+//            }
+        }
+    }
+    
     func getDifference(date: Date) -> Int {
         
         let difference = Int(Date().timeIntervalSince(date))
@@ -194,6 +270,112 @@ class TweetCell: UITableViewCell
             blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
             alpha: CGFloat(1.0)
         )
+    }
+    
+    func getFormatString(countVal: Int) -> String
+    {
+        switch(countVal)
+        {
+            case 1000...9999:
+                //in thousands
+                let countText = "\(countVal)"
+                
+                let index1 = countText.index(countText.startIndex, offsetBy: 1)
+                
+                let firstParse = countText.substring(to: index1)
+                
+                //second value
+                let start = countText.index(countText.startIndex, offsetBy: 1)
+                let end = countText.index(countText.startIndex, offsetBy: 2)
+                let range = start..<end
+                
+                let secondParse = countText.substring(with: range)
+                
+                print()
+                
+                return "\(firstParse).\(secondParse)K"
+                
+                break
+            case 10000...99999:
+                //in ten thousands
+                
+                let countText = "\(countVal)"
+                
+                let index1 = countText.index(countText.startIndex, offsetBy: 1)
+                
+                let firstParse = countText.substring(to: index1)
+                
+                //second value
+                let start = countText.index(countText.startIndex, offsetBy: 1)
+                let end = countText.index(countText.startIndex, offsetBy: 2)
+                let range = start..<end
+                
+                let secondParse = countText.substring(with: range)
+                
+                //third value
+                let start2 = countText.index(countText.startIndex, offsetBy: 2)
+                let end2 = countText.index(countText.startIndex, offsetBy: 3)
+                let range2 = start2..<end2
+                
+                let thirdParse = countText.substring(with: range2)
+                print()
+                
+                return "\(firstParse)\(secondParse).\(thirdParse)K"
+                
+                
+                break
+            case 100000...999999:
+                //in hundred thousands
+                
+                let countText = "\(countVal)"
+                
+                let index1 = countText.index(countText.startIndex, offsetBy: 1)
+                
+                let firstParse = countText.substring(to: index1)
+                
+                //second value
+                let start = countText.index(countText.startIndex, offsetBy: 1)
+                let end = countText.index(countText.startIndex, offsetBy: 2)
+                let range = start..<end
+                
+                let secondParse = countText.substring(with: range)
+                
+                //third value
+                let start2 = countText.index(countText.startIndex, offsetBy: 2)
+                let end2 = countText.index(countText.startIndex, offsetBy: 3)
+                let range2 = start2..<end2
+                
+                let thirdParse = countText.substring(with: range2)
+                print()
+                
+                return "\(firstParse)\(secondParse)\(thirdParse)K"
+                
+                break
+            case 1000000...9999999:
+                //in millions
+                
+                let countText = "\(countVal)"
+                
+                let index1 = countText.index(countText.startIndex, offsetBy: 1)
+                
+                let firstParse = countText.substring(to: index1)
+                
+                //second value
+                let start = countText.index(countText.startIndex, offsetBy: 1)
+                let end = countText.index(countText.startIndex, offsetBy: 2)
+                let range = start..<end
+                
+                let secondParse = countText.substring(with: range)
+                
+                print()
+                
+                return "\(firstParse).\(secondParse)M"
+                
+                break
+            default:
+                return "\(countVal)"
+                break
+        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool)
