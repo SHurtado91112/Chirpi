@@ -195,7 +195,8 @@ class TweetCell: UITableViewCell
                 TwitterClient.sharedInstance?.favWithId(id: tweet.id!)
                 tweet.isFavorited = !tweet.isFavorited!
                 
-                let countVal = tweet.favCount + 1
+                tweet.favCount = tweet.favCount + 1
+                let countVal = tweet.favCount
                 favoriteCountLabel.text = getFormatString(countVal: countVal)
             }
             else
@@ -206,7 +207,8 @@ class TweetCell: UITableViewCell
                 TwitterClient.sharedInstance?.unfavWithId(id: tweet.id!)
                 tweet.isFavorited = !tweet.isFavorited!
                 
-                let countVal = tweet.favCount - 1
+                tweet.favCount = tweet.favCount - 1
+                let countVal = tweet.favCount
                 favoriteCountLabel.text = getFormatString(countVal: countVal)
             }
             

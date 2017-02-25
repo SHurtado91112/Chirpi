@@ -36,12 +36,35 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         print(User.currentUser?.name! as String!)
         
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = UIColor.myTimberWolf
+        
         client?.homeTimeline(success: { (tweets: [Tweet]) in
             self.tweets = tweets
             
             print("\(self.tweets[0].userName!): @\(self.tweets[0].userHandle!) \n\(self.tweets[0].text!)")
             
             self.tableView.reloadData()
+            
+        }, failure: { (error: Error) in
+            print("Error: \(error.localizedDescription)")
+        })
+        
+        refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
+        self.tableView.insertSubview(refreshControl, at: 0)
+    }
+    
+    func refreshControlAction(_ refreshControl: UIRefreshControl)
+    {
+        
+        client?.homeTimeline(success: { (tweets: [Tweet]) in
+            self.tweets = tweets
+            
+            print("\(self.tweets[0].userName!): @\(self.tweets[0].userHandle!) \n\(self.tweets[0].text!)")
+            
+            self.tableView.reloadData()
+            refreshControl.endRefreshing()
             
         }, failure: { (error: Error) in
             print("Error: \(error.localizedDescription)")
