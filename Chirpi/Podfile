@@ -8,5 +8,5 @@ target 'Chirpi' do
   # Pods for Chirpi
     pod 'AFNetworking'
     pod 'BDBOAuth1Manager'
-    pod 'CCAnimations'
+    pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift3'
 end

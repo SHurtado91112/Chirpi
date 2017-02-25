@@ -16,18 +16,28 @@ PODS:
     - AFNetworking/NSURLSession
   - BDBOAuth1Manager (2.0.0):
     - AFNetworking/NSURLSession (~> 3.0.0)
-  - CCAnimations (0.0.2)
+  - Spring (1.0.3)
 
 DEPENDENCIES:
   - AFNetworking
   - BDBOAuth1Manager
-  - CCAnimations
+  - Spring (from `https://github.com/MengTo/Spring.git`, branch `swift3`)
+
+EXTERNAL SOURCES:
+  Spring:
+    :branch: swift3
+    :git: https://github.com/MengTo/Spring.git
+
+CHECKOUT OPTIONS:
+  Spring:
+    :commit: 3a9227c6e9157e7b47f5ac1ee5abab2a56b50002
+    :git: https://github.com/MengTo/Spring.git
 
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
   BDBOAuth1Manager: 92d17d06f8a648602962304cd2f35ae7394fa001
-  CCAnimations: f3af7fa4f7230d1a691616c656e07efe0482f6bf
+  Spring: 3f02b5dc3308572ef177b3cad0fa7bbc4b0706f7
 
-PODFILE CHECKSUM: 0653686678585caacb771a58bc4dad133f71c92a
+PODFILE CHECKSUM: baf10e96af224b9f59f34d118693dd8a114877c5
 
 COCOAPODS: 1.1.1

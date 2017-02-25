@@ -1,6 +1,0 @@
-framework module CCAnimations {
-  umbrella header "CCAnimations-umbrella.h"
-
-  export *
-  module * { export * }
-}

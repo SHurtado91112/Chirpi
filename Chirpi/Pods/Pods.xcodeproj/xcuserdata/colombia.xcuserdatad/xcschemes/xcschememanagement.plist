@@ -14,12 +14,12 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>CCAnimations.xcscheme</key>
+		<key>Pods-Chirpi.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-Chirpi.xcscheme</key>
+		<key>Spring.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -27,12 +27,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>5CF33886B1E51DFC8653E5105F3EA0CC</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>97FB345713E1DC68E515233C1DF7C233</key>
+		<key>80FC8C1CBE3298517C745B7E1BD177D4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -43,6 +38,11 @@
 			<true/>
 		</dict>
 		<key>DD08B071644C635261E151819F7F6FA8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F183889D36A7F7EFED3064F2CBB70291</key>
 		<dict>
 			<key>primary</key>
 			<true/>

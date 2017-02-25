@@ -8,28 +8,36 @@
 
 import UIKit
 import BDBOAuth1Manager
-import CCAnimations
+import Spring
 
 class LoginViewController: UIViewController
 {
     @IBOutlet weak var loginBtn: UIButton!
-    @IBOutlet weak var chirpiImg: UIImageView!
+    @IBOutlet weak var chirpiImg: SpringImageView!
     @IBOutlet weak var viewBack: UIView!
+    
+    @IBOutlet weak var bigChirpi: SpringImageView!
+    @IBOutlet weak var chirpiLabel: UILabel!
+    
+    var timer = Timer()
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
-        setGradientLayer()
+        //setGradientLayer()
         
         chirpiImg.image = UIImage(named: "Chirpi")?.withRenderingMode(.alwaysTemplate)
-        animateChirpi()
-//        let timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(animateChirpi), userInfo: nil, repeats: true)
-//        timer.fire()
         
         self.loginBtn.layer.cornerRadius = 40
         self.loginBtn.layer.borderColor = UIColor.twitterBlue.cgColor
         self.loginBtn.layer.borderWidth = 4
+        
+        self.viewBack.alpha = 0
+        
+        self.chirpiImg.isHidden = true
+        
+        animateChirpi()
     }
     
     func setGradientLayer()
@@ -50,32 +58,69 @@ class LoginViewController: UIViewController
     
     func animateChirpi()
     {
-        let circlePath = UIBezierPath(arcCenter: CGPoint(x: view.frame.midX, y: view.frame.midY), radius: 160, startAngle: 0, endAngle:CGFloat(M_PI)*2, clockwise: true)
+        self.bigChirpi.animation = "zoomOut"
+        self.bigChirpi.curve = "easeOutQuart"
+        self.bigChirpi.duration = 2.0
+        self.bigChirpi.damping = 0.7
+        self.bigChirpi.delay = 1
         
-        let animation = CAKeyframeAnimation(keyPath: "position")
-        
-        animation.duration = 3
-        animation.repeatCount = MAXFLOAT
-        animation.path = circlePath.cgPath
-
-        self.chirpiImg.layer.add(animation, forKey: nil)
-    
+        self.bigChirpi.animateToNext
+        {
+            self.bigChirpi.isHidden = true
+            
+            self.viewBack.alpha = 0
+            
+            UIView.animate(withDuration: 1.5, animations: {
+                self.chirpiLabel.transform = CGAffineTransform(translationX: 0, y: -396)
+                
+                 self.viewBack.alpha = 1
+             }, completion: { (true) in
+                self.chirpiImg.isHidden = false
+                self.chirpiImg.animation = "slideRight"
+                self.chirpiImg.curve = "easeOutQuart"
+                self.chirpiImg.duration = 2.0
+                self.chirpiImg.damping = 0.7
+                self.chirpiImg.animate()
+                
+                self.timer = Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(self.smallChirpin), userInfo: nil, repeats: true)
+                self.timer.fire()
+            })
+        }
     }
 
+    func smallChirpin()
+    {
+        self.chirpiImg.animation = "swing"
+        self.chirpiImg.curve = "easeOutQuart"
+        self.chirpiImg.duration = 1.0
+        self.chirpiImg.damping = 0.7
+        self.chirpiImg.animate()
+    }
+    
     @IBAction func loginPressed(_ sender: Any)
     {
-        let client = TwitterClient.sharedInstance
+        self.timer.invalidate()
         
-        client?.login(success: {
+        self.chirpiImg.animation = "slideLeft"
+        self.chirpiImg.curve = "easeOutQuart"
+        self.chirpiImg.duration = 2.0
+        self.chirpiImg.damping = 0.7
+        
+        self.chirpiImg.animateToNext
+        {
+            self.chirpiImg.isHidden = true
             
-            print("Logged In.")
-            self.performSegue(withIdentifier: "loginSegue", sender: self)
+            let client = TwitterClient.sharedInstance
             
-        }, failure: { (error: Error) in
-            print("Error: \(error.localizedDescription)")
-        })
-        
-        
+            client?.login(success: {
+                
+                print("Logged In.")
+                self.performSegue(withIdentifier: "loginSegue", sender: self)
+                
+            }, failure: { (error: Error) in
+                print("Error: \(error.localizedDescription)")
+            })
+        }
     }
 
     override func didReceiveMemoryWarning() {

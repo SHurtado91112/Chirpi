@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '97FB345713E1DC68E515233C1DF7C233'
-               BlueprintName = 'CCAnimations'
+               BlueprintIdentifier = 'F183889D36A7F7EFED3064F2CBB70291'
+               BlueprintName = 'Spring'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'CCAnimations.framework'>
+               BuildableName = 'Spring.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

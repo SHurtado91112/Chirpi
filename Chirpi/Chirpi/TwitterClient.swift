@@ -71,6 +71,14 @@ class TwitterClient: BDBOAuth1SessionManager
         })
     }
     
+    func logOut()
+    {
+        User.currentUser = nil
+        deauthorize()
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: User.userDidLogOutNotification), object: nil)
+    }
+    
     func homeTimeline(success: @escaping ([Tweet]) -> (), failure: (Error) -> ())
     {
         get(KeysAndTokens.home_timeline, parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
