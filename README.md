@@ -27,7 +27,6 @@ The following **additional** features are implemented:
 - [X] Spring animated splash screen and login screen.
 - [X] Elapsed time for each tweet is formatted.
 - [X] Retweet/Favorite counts are formatted.
-- [X] Elapsed time for each tweet is formatted.
 - [X] Border color of each user's avatar is their selected Twitter profile color
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
