@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Spring
 
 class TweetCell: UITableViewCell
 {
@@ -27,10 +28,10 @@ class TweetCell: UITableViewCell
     
     @IBOutlet weak var avatarImageView: UIImageView!
     
-    @IBOutlet weak var retweetBtn: UIButton!
+    @IBOutlet weak var retweetBtn: SpringButton!
     @IBOutlet weak var retweetCountLabel: UILabel!
 
-    @IBOutlet weak var favoriteBtn: UIButton!
+    @IBOutlet weak var favoriteBtn: SpringButton!
     @IBOutlet weak var favoriteCountLabel: UILabel!
     
     
@@ -147,6 +148,8 @@ class TweetCell: UITableViewCell
     {
         if(tweet.isRetweeted != nil)
         {
+            animateMeBoi(button: self.retweetBtn)
+            
             if(!tweet.isRetweeted!)
             {
                 retweetBtn.tintColor = UIColor.twitterBlue
@@ -181,6 +184,9 @@ class TweetCell: UITableViewCell
     {
         if(tweet.isFavorited != nil)
         {
+            
+            animateMeBoi(button: self.favoriteBtn)
+            
             if(!tweet.isFavorited!)
             {
                 favoriteBtn.tintColor = UIColor.myRoseMadder
@@ -210,6 +216,15 @@ class TweetCell: UITableViewCell
 //                self.parent?.reloadData()
 //            }
         }
+    }
+    
+    func animateMeBoi(button: SpringButton)
+    {
+        button.animation = "morph"
+        button.curve = "easeOutQuart"
+        button.duration = 1.0
+        button.damping = 0.7
+        button.animate()
     }
     
     func getDifference(date: Date) -> Int {

@@ -46,10 +46,6 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }, failure: { (error: Error) in
             print("Error: \(error.localizedDescription)")
         })
-        
-        
-
-        
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
