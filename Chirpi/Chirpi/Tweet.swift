@@ -20,6 +20,7 @@ class Tweet: NSObject
     
     var text: String?
     var mediaURL: String?
+    var retweetUser: String?
     var timestamp: Date?
     
     var isRetweeted: Bool?
@@ -49,14 +50,21 @@ class Tweet: NSObject
             profileColor = user?["profile_link_color"] as? String
         }
         
-        
-        //MAKE TWEET FIRST RECOGNIZE IF RETWEETED, apply text to that, to avoid truncating
         retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
 
         print("ENT: \(entities)")
         
         if let retweetStatus = dictionary["retweeted_status"] as? NSDictionary
         {
+            
+            //if tweet is retweeted, make it so that append retweeted image and user retweeted from
+            let retweetedUserDictionary = retweetStatus["user"] as? NSDictionary
+            
+            if(retweetedUserDictionary != nil)
+            {
+                retweetUser = retweetedUserDictionary?["screen_name"] as? String
+            }
+            
             text = retweetStatus["text"] as? String
             favCount = (retweetStatus["favorite_count"] as? Int) ?? 0
         }

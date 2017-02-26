@@ -26,6 +26,10 @@ class TweetCell: UITableViewCell
     @IBOutlet weak var tweetLabel: UILabel!
     var tweetText : String!
     
+    @IBOutlet weak var retweetUserLabel: UILabel!
+    
+    @IBOutlet weak var retweetUserImgView: UIImageView!
+    
     @IBOutlet weak var avatarImageView: UIImageView!
     
     @IBOutlet weak var retweetBtn: SpringButton!
@@ -43,11 +47,27 @@ class TweetCell: UITableViewCell
             handleLabel.text = "@\(tweet.userHandle!)"
             
             tweetLabel.text = tweet.text!
+            
+            if(tweet.retweetUser != nil)
+            {
+                self.retweetUserLabel.text = "@\(tweet.retweetUser!)"
+                
+                self.retweetUserImgView.isHidden = false
+                
+            }
+            else
+            {
+                self.retweetUserImgView.isHidden = true
+                self.retweetUserLabel.text = ""
+            }
+            
             if(tweet.mediaURL != nil)
             {
                 tweetLabel.text = "\(tweetLabel.text!)\n"
+                
                 tweetLabel.addImageWithURL(urlString: tweet.mediaURL!)
             }
+
             
             if(tweet.avatarLink != nil)
             {
@@ -139,7 +159,6 @@ class TweetCell: UITableViewCell
             {
                 let countVal = tweet.favCount
                 favoriteCountLabel.text = getFormatString(countVal: countVal)
-                
             }
         }
     }
@@ -147,6 +166,11 @@ class TweetCell: UITableViewCell
     override func awakeFromNib()
     {
         super.awakeFromNib()
+        self.retweetUserImgView.isHidden = true
+        
+        self.retweetUserImgView.image = UIImage(named: "retweet-icon")?.withRenderingMode(.alwaysTemplate)
+        
+        self.retweetUserLabel.text = ""
     }
     
     @IBAction func retweetPressed(_ sender: Any)
@@ -316,8 +340,6 @@ class TweetCell: UITableViewCell
                 print()
                 
                 return "\(firstParse).\(secondParse)K"
-                
-                break
             case 10000...99999:
                 //in ten thousands
                 
@@ -343,9 +365,7 @@ class TweetCell: UITableViewCell
                 print()
                 
                 return "\(firstParse)\(secondParse).\(thirdParse)K"
-                
-                
-                break
+            
             case 100000...999999:
                 //in hundred thousands
                 
@@ -371,8 +391,6 @@ class TweetCell: UITableViewCell
                 print()
                 
                 return "\(firstParse)\(secondParse)\(thirdParse)K"
-                
-                break
             case 1000000...9999999:
                 //in millions
                 
@@ -392,11 +410,8 @@ class TweetCell: UITableViewCell
                 print()
                 
                 return "\(firstParse).\(secondParse)M"
-                
-                break
             default:
                 return "\(countVal)"
-                break
         }
     }
     
@@ -416,7 +431,7 @@ extension UILabel
         let attachment: NSTextAttachment = NSTextAttachment()
         
         let url = URL(string: urlString)
-        //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+
         if let data = try? Data(contentsOf: url!)
         {
             attachment.image = UIImage(data: data, scale: UIScreen.main.scale)
@@ -449,9 +464,9 @@ extension UILabel
     func addImage(imageName: String, afterLabel bolAfterLabel: Bool = false)
     {
         let attachment: NSTextAttachment = NSTextAttachment()
-        attachment.image = UIImage(named: imageName)
+        attachment.image = UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)
+        attachment.image = attachment.image?.scaleImageToSize(newSize: CGSize(width: (attachment.image?.size.width)!/2, height: ((attachment.image?.size.height)!/1.5)))
         
-//        attachment.image?.scaleImageToSize(newSize: CGSize(width: self.frame.width/2, height: (attachment.image?.size.height)!))
         
         let attachmentString: NSAttributedString = NSAttributedString(attachment: attachment)
         
