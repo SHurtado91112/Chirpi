@@ -13,6 +13,8 @@ class TwitterClient: BDBOAuth1SessionManager
 {
     static let sharedInstance = TwitterClient(baseURL: URL(string: KeysAndTokens.baseURL)!, consumerKey: KeysAndTokens.consumerKey, consumerSecret: KeysAndTokens.consumerSecret)
     
+    static var count = 20
+    
     var loginSuccess: (()->())?
     var loginFailure: ((Error)->())?
     
@@ -140,6 +142,34 @@ class TwitterClient: BDBOAuth1SessionManager
             print("error: \(error)")
         })
 
+    }
+    
+    func homeTimelineWithIncrease(success: @escaping ([Tweet]) -> (), failure: (Error) -> ())
+    {
+        TwitterClient.count += 60
+        
+        if(TwitterClient.count >= 200)
+        {
+            TwitterClient.count = 200
+        }
+        
+        let parameters: [String : AnyObject] = ["count": TwitterClient.count as AnyObject]
+        
+        get(KeysAndTokens.home_timeline, parameters: parameters, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            
+            //                print("Tweets Accessed: \(response)")
+            
+            let dictionary = response as! [NSDictionary]
+            
+            let tweets = Tweet.tweetsFromArray(dictionaries: dictionary)
+            
+            //            print(tweets[0].text!)
+            success(tweets)
+            
+        }, failure: { (task: URLSessionDataTask?, error: Error) in
+            print("error: \(error)")
+        })
+        
     }
     
     func currentAccount(success: @escaping (User) -> (), failure: @escaping (Error)->())

@@ -19,6 +19,7 @@ class Tweet: NSObject
     var profileColor: String?
     
     var text: String?
+    var mediaURL: String?
     var timestamp: Date?
     
     var isRetweeted: Bool?
@@ -35,6 +36,8 @@ class Tweet: NSObject
         
         let user = dictionary["user"] as? NSDictionary
         
+        let entities = dictionary["entities"] as? NSDictionary
+        
         if(user != nil)
         {
             userName = user?["name"] as? String
@@ -46,16 +49,43 @@ class Tweet: NSObject
             profileColor = user?["profile_link_color"] as? String
         }
         
-        text = dictionary["text"] as? String
+        
+        //MAKE TWEET FIRST RECOGNIZE IF RETWEETED, apply text to that, to avoid truncating
         retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
+
+        print("ENT: \(entities)")
         
         if let retweetStatus = dictionary["retweeted_status"] as? NSDictionary
         {
+            text = retweetStatus["text"] as? String
             favCount = (retweetStatus["favorite_count"] as? Int) ?? 0
         }
         else
         {
+            text = dictionary["text"] as? String
             favCount = (dictionary["favorite_count"] as? Int) ?? 0
+        }
+        
+        //This section should be extended to include all forms of url as well, 
+        //not just from media keyword
+        let media = entities?["media"] as? NSArray
+        if(media != nil)
+        {
+            let mediaInd = media?[0] as? NSDictionary
+            if(mediaInd != nil)
+            {
+                let removeURL = mediaInd?["url"] as? String
+                if(removeURL != nil)
+                {
+                    print("MED: \(media!)")
+                    print("MEDIND: \(mediaInd!)")
+                    print("MEDURL: \(removeURL!)")
+
+                    mediaURL = mediaInd?["media_url_https"] as? String
+                    
+                    text = text?.replacingOccurrences(of: removeURL!, with: "", options: .literal, range: nil)
+                }
+            }
         }
         
         isRetweeted = dictionary["retweeted"] as? Bool

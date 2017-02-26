@@ -94,7 +94,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="101" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="V9q-d5-0bn">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.85490196080000003" green="0.83921568629999999" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="603" id="WSh-td-IoK"/>
                                     <constraint firstAttribute="width" constant="375" id="uNG-Hp-aBn"/>
@@ -191,6 +191,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="pdV-Pf-Kp7" firstAttribute="leading" secondItem="9uX-0m-Qca" secondAttribute="trailing" constant="8" id="2Mg-nQ-Nsv"/>
                                                 <constraint firstItem="D6R-6e-3li" firstAttribute="top" relation="greaterThanOrEqual" secondItem="pdV-Pf-Kp7" secondAttribute="bottom" constant="13" id="2ZY-tB-GPQ"/>
@@ -224,6 +225,7 @@
                                                 <constraint firstItem="enR-EM-WhK" firstAttribute="top" relation="greaterThanOrEqual" secondItem="pdV-Pf-Kp7" secondAttribute="bottom" constant="8" id="wHs-0B-dKu"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="avatarImageView" destination="9uX-0m-Qca" id="oSc-1z-VUt"/>
                                             <outlet property="favoriteBtn" destination="4Bf-kH-KMg" id="ulv-6d-LHx"/>
@@ -243,7 +245,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.98046517310000003" green="0.98046517310000003" blue="0.98046517310000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.85490196080000003" green="0.83921568629999999" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="V9q-d5-0bn" firstAttribute="leading" secondItem="ODs-I1-3wX" secondAttribute="leadingMargin" constant="-16" id="L2l-Jd-QQY"/>
                             <constraint firstItem="V9q-d5-0bn" firstAttribute="top" secondItem="KuP-3M-IdP" secondAttribute="bottom" id="yI6-B0-ZcW"/>

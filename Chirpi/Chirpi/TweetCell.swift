@@ -43,6 +43,11 @@ class TweetCell: UITableViewCell
             handleLabel.text = "@\(tweet.userHandle!)"
             
             tweetLabel.text = tweet.text!
+            if(tweet.mediaURL != nil)
+            {
+                tweetLabel.text = "\(tweetLabel.text!)\n"
+                tweetLabel.addImageWithURL(urlString: tweet.mediaURL!)
+            }
             
             if(tweet.avatarLink != nil)
             {
@@ -400,6 +405,108 @@ class TweetCell: UITableViewCell
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+
+}
+
+extension UILabel
+{
+    func addImageWithURL(urlString: String, afterLabel bolAfterLabel: Bool = true)
+    {
+        let attachment: NSTextAttachment = NSTextAttachment()
+        
+        let url = URL(string: urlString)
+        //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+        if let data = try? Data(contentsOf: url!)
+        {
+            attachment.image = UIImage(data: data, scale: UIScreen.main.scale)
+                
+            attachment.image = attachment.image?.scaleImageToSize(newSize: CGSize(width: self.frame.width, height: self.frame.width))//(attachment.image?.size.height)!))
+            
+            let attachmentString: NSAttributedString = NSAttributedString(attachment: attachment)
+            
+            if (bolAfterLabel)
+            {
+                let strLabelText: NSMutableAttributedString = NSMutableAttributedString(string: self.text!)
+                strLabelText.append(attachmentString)
+                
+                self.attributedText = strLabelText
+            }
+            else
+            {
+                let strLabelText: NSAttributedString = NSAttributedString(string: self.text!)
+                let mutableAttachmentString: NSMutableAttributedString = NSMutableAttributedString(attributedString: attachmentString)
+                mutableAttachmentString.append(strLabelText)
+                
+                self.attributedText = mutableAttachmentString
+            }
+            
+        }
+        
+    }
+    
+    
+    func addImage(imageName: String, afterLabel bolAfterLabel: Bool = false)
+    {
+        let attachment: NSTextAttachment = NSTextAttachment()
+        attachment.image = UIImage(named: imageName)
+        
+//        attachment.image?.scaleImageToSize(newSize: CGSize(width: self.frame.width/2, height: (attachment.image?.size.height)!))
+        
+        let attachmentString: NSAttributedString = NSAttributedString(attachment: attachment)
+        
+        if (bolAfterLabel)
+        {
+            let strLabelText: NSMutableAttributedString = NSMutableAttributedString(string: self.text!)
+            strLabelText.append(attachmentString)
+            
+            self.attributedText = strLabelText
+        }
+        else
+        {
+            let strLabelText: NSAttributedString = NSAttributedString(string: self.text!)
+            let mutableAttachmentString: NSMutableAttributedString = NSMutableAttributedString(attributedString: attachmentString)
+            mutableAttachmentString.append(strLabelText)
+            
+            self.attributedText = mutableAttachmentString
+        }
+    }
+    
+    func removeImage()
+    {
+        let text = self.text
+        self.attributedText = nil
+        self.text = text
+    }
+}
+
+extension UIImage
+{
+    /// Scales an image to fit within a bounds with a size governed by the passed size. Also keeps the aspect ratio.
+    /// Switch MIN to MAX for aspect fill instead of fit.
+    ///
+    /// - parameter newSize: newSize the size of the bounds the image must fit within.
+    ///
+    /// - returns: a new scaled image.
+    func scaleImageToSize(newSize: CGSize) -> UIImage {
+        var scaledImageRect = CGRect.zero
+        
+        let aspectWidth = newSize.width/self.size.width
+        let aspectheight = newSize.height/self.size.height
+        
+        let aspectRatio = max(aspectWidth, aspectheight)
+        
+        scaledImageRect.size.width = self.size.width * aspectRatio;
+        scaledImageRect.size.height = self.size.height * aspectRatio;
+        scaledImageRect.origin.x = (newSize.width - scaledImageRect.size.width) / 2.0;
+        scaledImageRect.origin.y = (newSize.height - scaledImageRect.size.height) / 2.0;
+        
+        UIGraphicsBeginImageContext(newSize)
+        draw(in: scaledImageRect)
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return scaledImage!
     }
 
 }
