@@ -93,14 +93,32 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "tweetCell", for: indexPath) as! TweetCell
+        
         
         let tweet = self.tweets[indexPath.row]
-        cell.parentView = self
         
-        cell.tweet = tweet
+        if(tweet.mediaURL != nil)
+        {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "tweetImageCell", for: indexPath) as! TweetCell
+            cell.hasImage = true
+            cell.tweet = tweet
+            
+            return cell
+        }
+        else
+        {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "tweetCell", for: indexPath) as! TweetCell
+            
+            cell.hasImage = false
+            cell.tweet = tweet
+            
+            return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
+    {
         
-        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
