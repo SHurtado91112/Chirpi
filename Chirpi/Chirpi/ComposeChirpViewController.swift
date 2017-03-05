@@ -28,6 +28,10 @@ class ComposeChirpViewController: UIViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
+     
+        self.chirpLimitLabel.textColor = UIColor.red
+        self.chirpButton.isEnabled = false
+        self.chirpButton.backgroundColor = UIColor.myTimberWolf
         
         self.chirpTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
