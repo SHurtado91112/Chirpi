@@ -81,21 +81,21 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         tabBarController?.tabBar.tintColor = UIColor.myRoseMadder
         
-//        MBProgressHUD.appearance().tintColor = UIColor.myRoseMadder
-//        MBProgressHUD.appearance().backgroundColor = UIColor.myRoseMadder
-//        MBProgressHUD.showAdded(to: self.view, animated: true)
-//        
-//        client?.homeTimeline(success: { (tweets: [Tweet]) in
-//            self.tweets = tweets
-//            MBProgressHUD.hide(for: self.view, animated: true)
-//            self.tableView.reloadData()
-//            
-//        }, failure: { (error: Error) in
-//            print("Error: \(error.localizedDescription)")
-//            MBProgressHUD.hide(for: self.view, animated: true)
-//        })
-//        
-//        MBProgressHUD.hide(for: self.view, animated: true)
+        MBProgressHUD.appearance().tintColor = UIColor.myRoseMadder
+        MBProgressHUD.appearance().backgroundColor = UIColor.myRoseMadder
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        
+        client?.homeTimeline(success: { (tweets: [Tweet]) in
+            self.tweets = tweets
+            MBProgressHUD.hide(for: self.view, animated: true)
+            self.tableView.reloadData()
+            
+        }, failure: { (error: Error) in
+            print("Error: \(error.localizedDescription)")
+            MBProgressHUD.hide(for: self.view, animated: true)
+        })
+        
+        MBProgressHUD.hide(for: self.view, animated: true)
     }
     
     func setUpInfiniteIndicator()
