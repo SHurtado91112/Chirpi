@@ -213,6 +213,8 @@ class TwitterClient: BDBOAuth1SessionManager
             TwitterClient.count = 200
         }
         
+        TwitterClient.count = 20
+        
         let parameters: [String : AnyObject] = ["count": TwitterClient.count as AnyObject]
         
         get(KeysAndTokens.home_timeline, parameters: parameters, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in

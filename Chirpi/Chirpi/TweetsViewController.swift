@@ -81,21 +81,21 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         tabBarController?.tabBar.tintColor = UIColor.myRoseMadder
         
-        MBProgressHUD.appearance().tintColor = UIColor.myRoseMadder
-        MBProgressHUD.appearance().backgroundColor = UIColor.myRoseMadder
-        MBProgressHUD.showAdded(to: self.view, animated: true)
-        
-        client?.homeTimeline(success: { (tweets: [Tweet]) in
-            self.tweets = tweets
-            MBProgressHUD.hide(for: self.view, animated: true)
-            self.tableView.reloadData()
-            
-        }, failure: { (error: Error) in
-            print("Error: \(error.localizedDescription)")
-            MBProgressHUD.hide(for: self.view, animated: true)
-        })
-        
-        MBProgressHUD.hide(for: self.view, animated: true)
+//        MBProgressHUD.appearance().tintColor = UIColor.myRoseMadder
+//        MBProgressHUD.appearance().backgroundColor = UIColor.myRoseMadder
+//        MBProgressHUD.showAdded(to: self.view, animated: true)
+//        
+//        client?.homeTimeline(success: { (tweets: [Tweet]) in
+//            self.tweets = tweets
+//            MBProgressHUD.hide(for: self.view, animated: true)
+//            self.tableView.reloadData()
+//            
+//        }, failure: { (error: Error) in
+//            print("Error: \(error.localizedDescription)")
+//            MBProgressHUD.hide(for: self.view, animated: true)
+//        })
+//        
+//        MBProgressHUD.hide(for: self.view, animated: true)
     }
     
     func setUpInfiniteIndicator()
@@ -162,9 +162,6 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func ActivateSegue(_ sender : Any?)
     {
-        
-        print("DEBUG Description: \(sender.debugDescription)")
-        
         let recog = sender as! CustomTap
         let indexPath = recog.indexPath
         
@@ -178,11 +175,20 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        let cell = tableView.cellForRow(at: indexPath)
+        let cell = tableView.cellForRow(at: indexPath) as! TweetCell
         
-        cell?.selectionStyle = .none
+        cell.selectionStyle = .none
         
-//        self.performSegue(withIdentifier: "detailSegue", sender: indexPath)
+        if(cell.hasImage)
+        {
+            self.performSegue(withIdentifier: "tweetDetailWithImageSegue", sender: indexPath)
+        }
+        else
+        {
+            self.performSegue(withIdentifier: "tweetDetailSegue", sender: indexPath)
+        }
+        
+        
     }
     
     @IBAction func logOutPressed(_ sender: Any)
@@ -270,6 +276,46 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             dest.profileColor = cell.tweet.profileColor!
             dest.bannerString = cell.tweet.userBannerString
             
+        }
+        else if(segue.identifier == "tweetDetailWithImageSegue")
+        {
+            let indexPath = sender as! IndexPath
+            
+            let cell = tableView.cellForRow(at: indexPath) as! TweetCell
+            
+            let dest = segue.destination as! DetailTableViewController
+            
+            dest.detailUser = cell.retweetUser
+            dest.contentText = cell.tweetLabel.text!
+            dest.contentImageString = cell.tweet.mediaURL!
+            dest.rechirpCount = cell.tweet.retweetCount
+            dest.favCount = cell.tweet.favCount
+            dest.hasImage = true
+            if(cell.tweet.timestamp != nil)
+            {
+                dest.dateStamp = cell.tweet.timestamp!
+            }
+            
+        }
+        else if(segue.identifier == "tweetDetailSegue")
+        {
+            let indexPath = sender as! IndexPath
+            
+            let cell = tableView.cellForRow(at: indexPath) as! TweetCell
+            
+            let dest = segue.destination as! DetailTableViewController
+            
+            print("CELL USER: \(cell.retweetUser)")
+            
+            dest.detailUser = cell.retweetUser
+            dest.contentText = cell.tweetLabel.text!
+            dest.rechirpCount = cell.tweet.retweetCount
+            dest.favCount = cell.tweet.favCount
+            dest.hasImage = false
+            if(cell.tweet.timestamp != nil)
+            {
+                dest.dateStamp = cell.tweet.timestamp!
+            }
         }
     }
 

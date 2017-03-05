@@ -20,7 +20,27 @@ class Tweet: NSObject
     
     var text: String?
     var mediaURL: String?
-    var retweetUser: String?
+    
+    //retweeted USER
+    var retweetUser: User?
+    
+    var retweetUserString: String?
+    var retweetUserName: String?
+    var retweetUserAvatarString: String?
+    var retweetUserProfileColor: String?
+    
+    var retweetUserBannerString: String?
+    
+    var retweetUserTagline: String?
+    
+    var retweetUserFav: Int = 0
+    
+    var retweetUserFollower: Int = 0
+    
+    var retweetUserFollowing: Int = 0
+    //end retweeted user
+    
+    
     var timestamp: Date?
     
     var isRetweeted: Bool?
@@ -47,6 +67,8 @@ class Tweet: NSObject
         
         if(user != nil)
         {
+            retweetUser = User(dictionary: user!)
+            
             userName = user?["name"] as? String
             
             userHandle = user?["screen_name"] as? String
@@ -78,7 +100,7 @@ class Tweet: NSObject
             
             if(retweetedUserDictionary != nil)
             {
-                retweetUser = retweetedUserDictionary?["screen_name"] as? String
+                retweetUser = User(dictionary: retweetedUserDictionary!)
             }
             
             text = retweetStatus["text"] as? String

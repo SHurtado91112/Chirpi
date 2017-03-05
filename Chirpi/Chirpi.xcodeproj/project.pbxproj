@@ -20,7 +20,10 @@
 		28298A2F1E5AAC2100B1AF01 /* TweetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28298A2E1E5AAC2100B1AF01 /* TweetsViewController.swift */; };
 		28298A341E5D3AFF00B1AF01 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28298A331E5D3AFF00B1AF01 /* SplashViewController.swift */; };
 		28298A501E5E20FF00B1AF01 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28298A4F1E5E20FF00B1AF01 /* TweetCell.swift */; };
-		287C9CA31E6A70400036281D /* TweetWithImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287C9CA21E6A70400036281D /* TweetWithImageCell.swift */; };
+		28763EF71E6CB6D600CBF4FA /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28763EF61E6CB6D600CBF4FA /* DetailTableViewController.swift */; };
+		28763EF91E6CB88000CBF4FA /* TweetUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28763EF81E6CB88000CBF4FA /* TweetUserCell.swift */; };
+		28763EFB1E6CB89000CBF4FA /* RetweetDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28763EFA1E6CB89000CBF4FA /* RetweetDetailCell.swift */; };
+		28763EFD1E6CB8AF00CBF4FA /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28763EFC1E6CB8AF00CBF4FA /* ButtonCell.swift */; };
 		28C7478B1E6B0F1900FCED7C /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C7478A1E6B0F1900FCED7C /* UserProfileViewController.swift */; };
 		28C7478D1E6BC10A00FCED7C /* ComposeChirpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C7478C1E6BC10A00FCED7C /* ComposeChirpViewController.swift */; };
 /* End PBXBuildFile section */
@@ -40,7 +43,10 @@
 		28298A2E1E5AAC2100B1AF01 /* TweetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetsViewController.swift; sourceTree = "<group>"; };
 		28298A331E5D3AFF00B1AF01 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		28298A4F1E5E20FF00B1AF01 /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
-		287C9CA21E6A70400036281D /* TweetWithImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetWithImageCell.swift; sourceTree = "<group>"; };
+		28763EF61E6CB6D600CBF4FA /* DetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
+		28763EF81E6CB88000CBF4FA /* TweetUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetUserCell.swift; sourceTree = "<group>"; };
+		28763EFA1E6CB89000CBF4FA /* RetweetDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetweetDetailCell.swift; sourceTree = "<group>"; };
+		28763EFC1E6CB8AF00CBF4FA /* ButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
 		28C7478A1E6B0F1900FCED7C /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		28C7478C1E6BC10A00FCED7C /* ComposeChirpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeChirpViewController.swift; sourceTree = "<group>"; };
 		2B4EF07D00AC454E804EDCC9 /* Pods-Chirpi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chirpi.release.xcconfig"; path = "Pods/Target Support Files/Pods-Chirpi/Pods-Chirpi.release.xcconfig"; sourceTree = "<group>"; };
@@ -108,7 +114,9 @@
 			isa = PBXGroup;
 			children = (
 				28298A4F1E5E20FF00B1AF01 /* TweetCell.swift */,
-				287C9CA21E6A70400036281D /* TweetWithImageCell.swift */,
+				28763EF81E6CB88000CBF4FA /* TweetUserCell.swift */,
+				28763EFC1E6CB8AF00CBF4FA /* ButtonCell.swift */,
+				28763EFA1E6CB89000CBF4FA /* RetweetDetailCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -116,6 +124,7 @@
 		28298A251E5A8BD100B1AF01 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				28763EF61E6CB6D600CBF4FA /* DetailTableViewController.swift */,
 				28298A1F1E5A6B0E00B1AF01 /* LoginViewController.swift */,
 				28C7478A1E6B0F1900FCED7C /* UserProfileViewController.swift */,
 				28C7478C1E6BC10A00FCED7C /* ComposeChirpViewController.swift */,
@@ -289,11 +298,14 @@
 				28C7478D1E6BC10A00FCED7C /* ComposeChirpViewController.swift in Sources */,
 				28298A221E5A6C7000B1AF01 /* Util.swift in Sources */,
 				28298A2F1E5AAC2100B1AF01 /* TweetsViewController.swift in Sources */,
+				28763EFB1E6CB89000CBF4FA /* RetweetDetailCell.swift in Sources */,
+				28763EFD1E6CB8AF00CBF4FA /* ButtonCell.swift in Sources */,
 				28298A2D1E5AA62100B1AF01 /* TwitterClient.swift in Sources */,
 				28298A0E1E5A69BF00B1AF01 /* AppDelegate.swift in Sources */,
+				28763EF71E6CB6D600CBF4FA /* DetailTableViewController.swift in Sources */,
 				28298A341E5D3AFF00B1AF01 /* SplashViewController.swift in Sources */,
 				28C7478B1E6B0F1900FCED7C /* UserProfileViewController.swift in Sources */,
-				287C9CA31E6A70400036281D /* TweetWithImageCell.swift in Sources */,
+				28763EF91E6CB88000CBF4FA /* TweetUserCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

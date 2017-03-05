@@ -20,6 +20,8 @@ class TweetCell: UITableViewCell
     
     let recognizer = CustomTap()
     
+    var retweetUser : User?
+    
     weak var parentView: UIViewController? = nil
     
     @IBOutlet weak var nameLabel: UILabel!
@@ -37,6 +39,7 @@ class TweetCell: UITableViewCell
     @IBOutlet weak var tweetImageView: UIImageView!
     
     @IBOutlet weak var retweetUserLabel: UILabel!
+    var retweetUserName: String?
     
     @IBOutlet weak var retweetUserImgView: UIImageView!
     
@@ -61,15 +64,21 @@ class TweetCell: UITableViewCell
             
             tweetLabel.text = tweet.text!
             
-            if(tweet.retweetUser != nil)
+            if(tweet.retweetUserName != nil)
             {
-                self.retweetUserLabel.text = "@\(tweet.retweetUser!)"
+                self.retweetUserLabel.text = "@\(tweet.retweetUserName!)"
+                
+                self.retweetUser = tweet.retweetUser
                 
                 self.retweetUserImgView.isHidden = false
                 
             }
             else
             {
+                print("TWEET USER: \(tweet.retweetUser)")
+                
+                self.retweetUser = tweet.retweetUser
+                
                 self.retweetUserImgView.isHidden = true
                 self.retweetUserLabel.text = ""
             }
@@ -94,12 +103,13 @@ class TweetCell: UITableViewCell
                 avatarImageView.setImageWith(URL(string: tweet.avatarLink!)!)
             }
             
-            avatarImageView.layer.cornerRadius = 15
             
             let avatarColor = hexStringToUIColor(hex: tweet.profileColor!)
             
             avatarImageView.layer.borderColor = avatarColor.cgColor
             avatarImageView.layer.borderWidth = 4
+            avatarImageView.layer.cornerRadius = 15
+            
             avatarImageView.clipsToBounds = true
 
             if(tweet.timestamp != nil)
