@@ -18,6 +18,16 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     let client = TwitterClient.sharedInstance
     
+    var tweetInstanceName: String?
+    var tweetInstanceHandle: String?
+    var tweetInstanceTagLine: String?
+    var tweetInstanceAvatar: String?
+    var tweetInstanceFollowing: String?
+    var tweetInstanceFollower: String?
+    var tweetInstanceFavorite: String?
+    var tweetInstanceColor: String?
+    var tweetInstanceBanner: String?
+    
     @IBOutlet weak var logNavBarBtn: UIBarButtonItem!
     
 
@@ -57,6 +67,13 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.tableView.insertSubview(refreshControl, at: 0)
     }
     
+    override func viewDidAppear(_ animated: Bool)
+    {
+        navigationController?.navigationBar.barTintColor = UIColor.myRoseMadder
+        
+        tabBarController?.tabBar.tintColor = UIColor.myRoseMadder
+    }
+    
     func setUpInfiniteIndicator()
     {
         // Set up Infinite Scroll loading indicator
@@ -94,7 +111,6 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         
-        
         let tweet = self.tweets[indexPath.row]
         
         if(tweet.mediaURL != nil)
@@ -102,18 +118,35 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let cell = tableView.dequeueReusableCell(withIdentifier: "tweetImageCell", for: indexPath) as! TweetCell
             cell.hasImage = true
             cell.tweet = tweet
+            cell.recognizer.indexPath = indexPath
+            cell.recognizer.addTarget(self, action: #selector(TweetsViewController.ActivateSegue))
             
             return cell
         }
         else
         {
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "tweetCell", for: indexPath) as! TweetCell
             
             cell.hasImage = false
             cell.tweet = tweet
             
+            cell.recognizer.indexPath = indexPath
+            cell.recognizer.addTarget(self, action: #selector(ActivateSegue(_:)))
+            
             return cell
         }
+    }
+    
+    func ActivateSegue(_ sender : Any?)
+    {
+        
+        print("DEBUG Description: \(sender.debugDescription)")
+        
+        let recog = sender as! CustomTap
+        let indexPath = recog.indexPath
+        
+        self.performSegue(withIdentifier: "timelineToProfileSegue", sender: indexPath)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
@@ -188,15 +221,35 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
     }
     
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if(segue.identifier == "timelineToProfileSegue")
+        {
+            let indexPath = sender as! IndexPath
+            
+            let cell = tableView.cellForRow(at: indexPath) as! TweetCell
+            
+            let dest = segue.destination as! UserProfileViewController
+            
+            dest.nameText = cell.nameLabel.text!
+            
+            dest.user = dest.nameText!
+            
+            dest.handleText = "\(cell.handleLabel.text!)"
+            dest.tagText = cell.tweet.tagline!
+            dest.avatarString = cell.tweet.avatarLink!
+            
+            dest.followingCount =  cell.tweet.userFollowing
+            dest.followerCount = cell.tweet.userFollower
+            dest.favoriteCount = cell.tweet.userFav
+            dest.profileColor = cell.tweet.profileColor!
+            dest.bannerString = cell.tweet.userBannerString
+            
+        }
     }
-    */
 
 }
 

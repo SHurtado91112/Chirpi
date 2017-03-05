@@ -13,7 +13,14 @@ class User: NSObject
     var name: String?
     var screenName: String?
     var profileURL: URL?
+    var profileBannerURL: URL?
+    
     var tagline: String?
+    var profileColor: String?
+    
+    var favCount: Int!
+    var followingCount: Int!
+    var followerCount: Int!
     
     var dictionary: NSDictionary?
     
@@ -23,10 +30,25 @@ class User: NSObject
     {
         self.dictionary = dictionary
         
+        print("SECRET2: \(dictionary)")
+        
         name = dictionary["name"] as? String
         screenName = dictionary["screen_name"] as? String
         
+        favCount = dictionary["favourites_count"] as? Int
+        followingCount = dictionary["friends_count"] as? Int
+        followerCount = dictionary["followers_count"] as? Int
+        
+        profileColor = dictionary["profile_link_color"] as? String
+        
+        let profileBanString = dictionary["profile_banner_url"] as? String
+        
         let profileURLString = dictionary["profile_image_url_https"] as? String
+        
+        if(profileBanString != nil)
+        {
+            profileBannerURL = URL(string: profileBanString!)
+        }
         
         if(profileURLString != nil)
         {

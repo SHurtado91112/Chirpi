@@ -29,6 +29,12 @@ class Tweet: NSObject
     var retweetCount: Int = 0
     var favCount: Int = 0
     
+    var tagline: String?
+    var userFav: Int = 0
+    var userFollower: Int = 0
+    var userFollowing: Int = 0
+    var userBannerString: String?
+    
     init(dictionary: NSDictionary)
     {
         print(dictionary)
@@ -48,6 +54,16 @@ class Tweet: NSObject
             avatarLink = user?["profile_image_url_https"] as? String
             
             profileColor = user?["profile_link_color"] as? String
+            
+            tagline = user?["description"] as? String
+            
+            userFav = (user?["favourites_count"] as? Int)!
+            
+            userFollower = (user?["followers_count"] as? Int)!
+            
+            userFollowing = (user?["friends_count"] as? Int)!
+            
+            userBannerString = user?["profile_banner_url"] as? String
         }
         
         retweetCount = (dictionary["retweet_count"] as? Int) ?? 0

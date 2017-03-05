@@ -9,8 +9,16 @@
 import UIKit
 import Spring
 
+class CustomTap: UITapGestureRecognizer
+{
+    var indexPath: IndexPath? = nil
+    
+}
+
 class TweetCell: UITableViewCell
 {
+    
+    let recognizer = CustomTap()
     
     weak var parentView: UIViewController? = nil
     
@@ -74,51 +82,12 @@ class TweetCell: UITableViewCell
                 {
                     self.tweetImageView.setImageWith(URL(string: tweet.mediaURL!)!)
                     self.tweetImageView.contentMode = .scaleAspectFill
+                    
+                    self.tweetImageView.layer.cornerRadius = 15
+                    
                     self.tweetImageView.clipsToBounds = true
                 }
-                
-                //                let tweetImageView = UIImageView()
-//                
-//                let xPos = self.tweetLabel.frame.origin.x
-//                let yPos = self.tweetLabel.frame.origin.y  + self.tweetLabel.frame.height
-//                
-//                tweetImageView.frame = CGRect(x: xPos, y: yPos, width: self.tweetLabel.frame.width, height: self.tweetLabel.frame.width)
-//                tweetImageView.setImageWith(URL(string: tweet.mediaURL!)!)
-//                tweetImageView.contentMode = .scaleAspectFit
-//                
-//                let constUpLabel = NSLayoutConstraint(item: tweetImageView, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self.tweetLabel, attribute: NSLayoutAttribute.top, multiplier: 1.0, constant: 8)
-//                
-//                let constReply = NSLayoutConstraint(item: tweetImageView, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.greaterThanOrEqual, toItem: self.replyBtn, attribute: NSLayoutAttribute.bottom, multiplier: 1.0, constant: 8)
-//                
-//                let constRetweetBtn = NSLayoutConstraint(item: tweetImageView, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.greaterThanOrEqual, toItem: self.retweetBtn, attribute: NSLayoutAttribute.bottom, multiplier: 1.0, constant: 8)
-//                
-//                let constRetweetLabel = NSLayoutConstraint(item: tweetImageView, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.greaterThanOrEqual, toItem: self.retweetCountLabel, attribute: NSLayoutAttribute.bottom, multiplier: 1.0, constant: 8)
-//                
-//                let constFavBtn = NSLayoutConstraint(item: tweetImageView, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.greaterThanOrEqual, toItem: self.favoriteBtn, attribute: NSLayoutAttribute.bottom, multiplier: 1.0, constant: 8)
-//                
-//                let constFavLabel = NSLayoutConstraint(item: tweetImageView, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.greaterThanOrEqual, toItem: self.favoriteCountLabel, attribute: NSLayoutAttribute.bottom, multiplier: 1.0, constant: 8)
-//
-//                
-//                self.addSubview(tweetImageView)
-//                
-//                
-//                
-//                self.addConstraints([constUpLabel, constReply, constRetweetBtn, constRetweetLabel, constFavBtn, constFavLabel]);
             }
-//            else
-//            {
-//                //TO BE REMOVED
-//                
-//                if(self.tweetImageView != nil && self.window != nil)
-//                {
-////                    print("Removing from Super View: \(self.nameLabel.text!) <-> \(self.window)")
-//                    
-////                    self.tweetImageView.removeFromSuperview()
-//                    
-////                    self.tweetImageView.isHidden = true
-//                }
-//            }
-
             
             if(tweet.avatarLink != nil)
             {
@@ -222,6 +191,10 @@ class TweetCell: UITableViewCell
         self.retweetUserImgView.image = UIImage(named: "retweet-icon")?.withRenderingMode(.alwaysTemplate)
         
         self.retweetUserLabel.text = ""
+        
+        self.avatarImageView.isUserInteractionEnabled = true
+        
+        self.avatarImageView.addGestureRecognizer(recognizer)
     }
     
     @IBAction func retweetPressed(_ sender: Any)

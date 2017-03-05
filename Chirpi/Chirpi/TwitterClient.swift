@@ -125,6 +125,51 @@ class TwitterClient: BDBOAuth1SessionManager
         }
     }
     
+    func userTimeline(name: String, success: @escaping ([Tweet]) -> (), failure: (Error) -> ())
+    {
+        let param: [String : AnyObject] = ["Name": name as AnyObject]
+        
+        get(KeysAndTokens.user_timeline, parameters: param, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            
+            let dictionary = response as! [NSDictionary]
+            
+            let tweets = Tweet.tweetsFromArray(dictionaries: dictionary)
+            
+            //            print(tweets[0].text!)
+            success(tweets)
+            
+        }, failure: { (task: URLSessionDataTask?, error: Error) in
+            print("error: \(error)")
+        })
+        
+    }
+    
+    func userInfo(name: String, success: @escaping (String) -> (), failure: (Error) -> ())
+    {
+        let param: [String : AnyObject] = ["Name": name as AnyObject]
+        
+        get(KeysAndTokens.user_info, parameters: param, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            
+            let dictionary = response as! NSDictionary
+            
+            print("SECRETKEY: \(dictionary)")
+            
+            let sizes = dictionary["sizes"] as? NSDictionary
+            
+            let mobile_retina = sizes?["mobile_retina"] as? NSDictionary
+            
+            let url = mobile_retina?["url"] as? String
+            
+            //            print(tweets[0].text!)
+            success(url!)
+            
+        }, failure: { (task: URLSessionDataTask?, error: Error) in
+            print("error: \(error)")
+        })
+        
+    }
+
+    
     func homeTimeline(success: @escaping ([Tweet]) -> (), failure: (Error) -> ())
     {
         get(KeysAndTokens.home_timeline, parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
