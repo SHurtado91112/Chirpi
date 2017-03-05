@@ -9,4 +9,5 @@ target 'Chirpi' do
     pod 'AFNetworking'
     pod 'BDBOAuth1Manager'
     pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift3'
+    pod 'MBProgressHUD'
 end

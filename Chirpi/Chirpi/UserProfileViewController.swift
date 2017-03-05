@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class UserProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate
 {
@@ -131,14 +132,23 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         
         self.userBannerView.clipsToBounds = true
 
+        MBProgressHUD.appearance().tintColor = UIColor.myRoseMadder
+        MBProgressHUD.appearance().backgroundColor = UIColor.myRoseMadder
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        
         //would work for other users if allowed the access
         client?.userTimeline(name: user, success: { (tweets: [Tweet]) in
             self.tweets = tweets
             
             self.tableView.reloadData()
             
+            
+            MBProgressHUD.hide(for: self.view, animated: true)
+            
         }, failure: { (error: Error) in
             print("Error: \(error.localizedDescription)")
+            
+            MBProgressHUD.hide(for: self.view, animated: true)
         })
         
         if(self.profileColor == "")
@@ -153,6 +163,14 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
         self.tableView.insertSubview(refreshControl, at: 0)
 
+        
+        navigationController?.navigationBar.barTintColor = self.hexStringToUIColor(hex: self.profileColor)
+        
+        tabBarController?.tabBar.tintColor = self.hexStringToUIColor(hex: self.profileColor)
+    }
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
         
         navigationController?.navigationBar.barTintColor = self.hexStringToUIColor(hex: self.profileColor)
         

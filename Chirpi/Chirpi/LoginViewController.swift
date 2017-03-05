@@ -9,6 +9,7 @@
 import UIKit
 import BDBOAuth1Manager
 import Spring
+import MBProgressHUD
 
 class LoginViewController: UIViewController
 {
@@ -106,6 +107,10 @@ class LoginViewController: UIViewController
         self.chirpiImg.duration = 2.0
         self.chirpiImg.damping = 0.7
         
+        MBProgressHUD.appearance().tintColor = UIColor.myRoseMadder
+        MBProgressHUD.appearance().backgroundColor = UIColor.myRoseMadder
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        
         self.chirpiImg.animateToNext
         {
             self.chirpiImg.isHidden = true
@@ -117,8 +122,14 @@ class LoginViewController: UIViewController
                 print("Logged In.")
                 self.performSegue(withIdentifier: "loginSegue", sender: self)
                 
+                MBProgressHUD.hide(for: self.view, animated: true)
+
+                
             }, failure: { (error: Error) in
                 print("Error: \(error.localizedDescription)")
+                
+                MBProgressHUD.hide(for: self.view, animated: true)
+
             })
         }
     }

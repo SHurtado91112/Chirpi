@@ -16,11 +16,13 @@ PODS:
     - AFNetworking/NSURLSession
   - BDBOAuth1Manager (2.0.0):
     - AFNetworking/NSURLSession (~> 3.0.0)
+  - MBProgressHUD (1.0.0)
   - Spring (1.0.3)
 
 DEPENDENCIES:
   - AFNetworking
   - BDBOAuth1Manager
+  - MBProgressHUD
   - Spring (from `https://github.com/MengTo/Spring.git`, branch `swift3`)
 
 EXTERNAL SOURCES:
@@ -36,8 +38,9 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
   BDBOAuth1Manager: 92d17d06f8a648602962304cd2f35ae7394fa001
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   Spring: 3f02b5dc3308572ef177b3cad0fa7bbc4b0706f7
 
-PODFILE CHECKSUM: baf10e96af224b9f59f34d118693dd8a114877c5
+PODFILE CHECKSUM: e282e6f5bfdd8eacd5b79e490ca2d272850fcb22
 
 COCOAPODS: 1.1.1

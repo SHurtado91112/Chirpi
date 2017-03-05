@@ -30,6 +30,8 @@ class TwitterClient: BDBOAuth1SessionManager
             
             let url = URL(string: KeysAndTokens.baseURL + KeysAndTokens.authorizeURL + (requestToken?.token)!)!
             
+            
+            
             UIApplication.shared.open(url, options: [:], completionHandler: { (false) in
                 print("I'm in.")
             })
@@ -52,6 +54,8 @@ class TwitterClient: BDBOAuth1SessionManager
                 User.currentUser = user
                 self.loginSuccess?()
             }, failure: { (error: Error) in
+                
+                
                 self.loginFailure?(error)
             })
 //            client?.currentAccount()

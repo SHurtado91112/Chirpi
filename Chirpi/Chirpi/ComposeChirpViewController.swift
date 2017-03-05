@@ -31,7 +31,6 @@ class ComposeChirpViewController: UIViewController {
      
         self.chirpLimitLabel.textColor = UIColor.red
         self.chirpButton.isEnabled = false
-        self.chirpButton.backgroundColor = UIColor.myTimberWolf
         
         self.chirpTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
@@ -113,13 +112,11 @@ class ComposeChirpViewController: UIViewController {
         {
             self.chirpLimitLabel.textColor = UIColor.red
             self.chirpButton.isEnabled = false
-            self.chirpButton.backgroundColor = UIColor.myTimberWolf
         }
         else
         {
             self.chirpLimitLabel.textColor = UIColor.myOnyxGray
             self.chirpButton.isEnabled = true
-            self.chirpButton.backgroundColor = UIColor.myRoseMadder
         }
     }
     
@@ -127,7 +124,8 @@ class ComposeChirpViewController: UIViewController {
     @IBAction func clearButtonPressed(_ sender: Any)
     {
         self.chirpLimitLabel.text = "\(140)"
-        
+        self.chirpLimitLabel.textColor = UIColor.red
+        self.chirpButton.isEnabled = false
         self.chirpTextField.text = ""
     }
     

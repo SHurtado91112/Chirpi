@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
@@ -54,13 +55,20 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let refreshControl = UIRefreshControl()
         refreshControl.tintColor = UIColor.myOnyxGray
         
+        MBProgressHUD.appearance().tintColor = UIColor.myRoseMadder
+        MBProgressHUD.appearance().backgroundColor = UIColor.myRoseMadder
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        
         client?.homeTimeline(success: { (tweets: [Tweet]) in
             self.tweets = tweets
             
             self.tableView.reloadData()
             
+            MBProgressHUD.hide(for: self.view, animated: true)
+            
         }, failure: { (error: Error) in
             print("Error: \(error.localizedDescription)")
+            MBProgressHUD.hide(for: self.view, animated: true)
         })
         
         refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
@@ -73,14 +81,21 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         tabBarController?.tabBar.tintColor = UIColor.myRoseMadder
         
+        MBProgressHUD.appearance().tintColor = UIColor.myRoseMadder
+        MBProgressHUD.appearance().backgroundColor = UIColor.myRoseMadder
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        
         client?.homeTimeline(success: { (tweets: [Tweet]) in
             self.tweets = tweets
-            
+            MBProgressHUD.hide(for: self.view, animated: true)
             self.tableView.reloadData()
             
         }, failure: { (error: Error) in
             print("Error: \(error.localizedDescription)")
+            MBProgressHUD.hide(for: self.view, animated: true)
         })
+        
+        MBProgressHUD.hide(for: self.view, animated: true)
     }
     
     func setUpInfiniteIndicator()
