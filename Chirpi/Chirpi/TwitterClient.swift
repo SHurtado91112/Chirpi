@@ -152,8 +152,6 @@ class TwitterClient: BDBOAuth1SessionManager
             
             let dictionary = response as! NSDictionary
             
-            print("SECRETKEY: \(dictionary)")
-            
             let sizes = dictionary["sizes"] as? NSDictionary
             
             let mobile_retina = sizes?["mobile_retina"] as? NSDictionary
@@ -169,6 +167,19 @@ class TwitterClient: BDBOAuth1SessionManager
         
     }
 
+    func postTweet(message: String)
+    {
+        let urlString = KeysAndTokens.baseURL + KeysAndTokens.update_tweet + "\(message)"
+        
+        post(urlString, parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            
+            print("Successful Chirp!")
+            
+        }) { (task: URLSessionDataTask?, error: Error) in
+            
+            print("error: \(error)")
+        }
+    }
     
     func homeTimeline(success: @escaping ([Tweet]) -> (), failure: (Error) -> ())
     {

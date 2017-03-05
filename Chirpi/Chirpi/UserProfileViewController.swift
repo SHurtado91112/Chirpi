@@ -150,9 +150,36 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         self.followerCountLabel.textColor = self.hexStringToUIColor(hex: self.profileColor)
         self.favoriteCountLabel.textColor = self.hexStringToUIColor(hex: self.profileColor)
         
+        refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
+        self.tableView.insertSubview(refreshControl, at: 0)
+
+        
         navigationController?.navigationBar.barTintColor = self.hexStringToUIColor(hex: self.profileColor)
         
         tabBarController?.tabBar.tintColor = self.hexStringToUIColor(hex: self.profileColor)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool)
+    {
+        navigationController?.navigationBar.barTintColor = UIColor.myRoseMadder
+        
+        tabBarController?.tabBar.tintColor = UIColor.myRoseMadder
+    }
+    
+    func refreshControlAction(_ refreshControl: UIRefreshControl)
+    {
+        
+        client?.userTimeline(name: user, success: { (tweets: [Tweet]) in
+            self.tweets = tweets
+            
+            self.tableView.reloadData()
+            
+            refreshControl.endRefreshing()
+            
+        }, failure: { (error: Error) in
+            print("Error: \(error.localizedDescription)")
+        })
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int

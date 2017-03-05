@@ -72,6 +72,15 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         navigationController?.navigationBar.barTintColor = UIColor.myRoseMadder
         
         tabBarController?.tabBar.tintColor = UIColor.myRoseMadder
+        
+        client?.homeTimeline(success: { (tweets: [Tweet]) in
+            self.tweets = tweets
+            
+            self.tableView.reloadData()
+            
+        }, failure: { (error: Error) in
+            print("Error: \(error.localizedDescription)")
+        })
     }
     
     func setUpInfiniteIndicator()
@@ -103,8 +112,6 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        print(tweets.count)
-        
         return tweets.count
     }
     
