@@ -137,6 +137,7 @@ class ComposeChirpViewController: UIViewController {
             
             TwitterClient.sharedInstance?.postTweet(message: message)
             
+            KeysAndTokens.composeSent = true
             _ = navigationController?.popViewController(animated: true)
         }
     }

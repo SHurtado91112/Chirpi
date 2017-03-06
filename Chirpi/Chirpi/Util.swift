@@ -11,6 +11,8 @@ import UIKit
 
 struct KeysAndTokens
 {
+    static var composeSent = false
+    
     static let baseURL : String = "https://api.twitter.com/"
     static let consumerKey : String = "CQMmBlL50J99VSXeYDstZVcII"
     static let consumerSecret : String = "vahBAi9HsQG961EGhHIqgrXUaiSMLXwTXizGuhqLMQQXOgeVxI"
